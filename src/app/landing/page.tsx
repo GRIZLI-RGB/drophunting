@@ -4,7 +4,7 @@ import { FaCheck, FaDollarSign } from "react-icons/fa6";
 import { MdAccessTime } from "react-icons/md";
 import { HiLightningBolt } from "react-icons/hi";
 import { BsTwitterX } from "react-icons/bs";
-import { FaDiscord, FaInstagram, FaPlay, FaCaretDown } from "react-icons/fa";
+import { FaPlay, FaCaretDown } from "react-icons/fa";
 import { RiTelegram2Fill } from "react-icons/ri";
 import { GrLanguage } from "react-icons/gr";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -384,7 +384,7 @@ const Landing = () => {
             <div className="flex">
               <a
                 target="_blank"
-                href="https://google.com"
+                href="https://t.me/drophunting_group"
                 className="hover:opacity-80 transition-opacity flex items-center justify-center gap-[10px] bg-[#159ADC] pl-[16px] pr-[31px] py-[10px] rounded-[12px]">
                 <div>
                   <RiTelegram2Fill size={32} />
@@ -594,25 +594,29 @@ const Landing = () => {
             <div className="flex items-center justify-center">
               <div className="flex items-center gap-[40px]">
                 <BsTwitterX
-                  onClick={() => window.open("https://google.com", "_blank")}
+                  onClick={() =>
+                    window.open("https://x.com/Drophunting_io", "_blank")
+                  }
                   className="cursor-pointer hover:opacity-80 transition-opacity"
                   size={35}
                 />
-                <FaDiscord
+                {/* <FaDiscord
                   onClick={() => window.open("https://google.com", "_blank")}
                   className="cursor-pointer hover:opacity-80 transition-opacity"
                   size={40}
-                />
+                /> */}
                 <RiTelegram2Fill
-                  onClick={() => window.open("https://google.com", "_blank")}
+                  onClick={() =>
+                    window.open("t.me/drophunting_group", "_blank")
+                  }
                   className="cursor-pointer hover:opacity-80 transition-opacity"
                   size={40}
                 />
-                <FaInstagram
+                {/* <FaInstagram
                   onClick={() => window.open("https://google.com", "_blank")}
                   className="cursor-pointer hover:opacity-80 transition-opacity"
                   size={40}
-                />
+                /> */}
               </div>
             </div>
           </div>
@@ -646,25 +650,29 @@ const Landing = () => {
               </p>
               <div className="flex items-center gap-[10px] mb-[24px]">
                 <BsTwitterX
-                  onClick={() => window.open("https://google.com", "_blank")}
+                  onClick={() =>
+                    window.open("https://x.com/Drophunting_io", "_blank")
+                  }
                   className="cursor-pointer hover:opacity-80 transition-opacity"
                   size={23}
                 />
-                <FaDiscord
+                {/* <FaDiscord
                   onClick={() => window.open("https://google.com", "_blank")}
                   className="cursor-pointer hover:opacity-80 transition-opacity"
                   size={27}
-                />
+                /> */}
                 <RiTelegram2Fill
-                  onClick={() => window.open("https://google.com", "_blank")}
+                  onClick={() =>
+                    window.open("https://t.me/drophunting_group", "_blank")
+                  }
                   className="cursor-pointer hover:opacity-80 transition-opacity"
                   size={27}
                 />
-                <FaInstagram
+                {/* <FaInstagram
                   onClick={() => window.open("https://google.com", "_blank")}
                   className="cursor-pointer hover:opacity-80 transition-opacity"
                   size={27}
-                />
+                /> */}
               </div>
               <ul className="hidden lg:hidden md:flex flex-col gap-[17px] w-[150px]">
                 <li className="text-[14px] leading-[13px] text-[#9AA5B9] hover:text-white transition-colors cursor-pointer">

@@ -89,7 +89,7 @@ i18n.use(initReactI18next).init({
         blog: {
           title: "Blog",
           description:
-            "Celebrate your web3 journey. Complete quests and earn drops!",
+            "Celebrate your journey in Web3. Participate in activities and earn rewards!",
           search: "Search",
           articles: "articles",
           sortBy: "Sort by",
@@ -123,7 +123,7 @@ i18n.use(initReactI18next).init({
         favorites: {
           title: "Favorites",
           description:
-            "Celebrate your web3 journey. Complete quests and earn drops!",
+            "Celebrate your journey in Web3. Participate in activities and earn rewards!",
           search: "Search",
           favorites: "favorites",
           sortBy: "Sort by",
@@ -161,13 +161,13 @@ i18n.use(initReactI18next).init({
         guides: {
           title: "Guides",
           description:
-            "Celebrate your web3 journey. Complete quests and earn drops!",
+            "Celebrate your journey in Web3. Participate in activities and earn rewards!",
           search: "Search",
           airdrops: "airdrops",
           sortBy: "Sort by",
           sortByDefault: "By default",
           sortByNewest: "By newest",
-          sortByInvest: "By investment",
+          sortByInvest: "Collected, $",
           sortByPriority: "By priority",
           sortByScore: "By score",
           sortByNetwork: "By network",
@@ -338,7 +338,7 @@ i18n.use(initReactI18next).init({
         },
         plansModal: {
           title: "Plans",
-          description: "Get Unlimited Access to the Site Materials",
+          description: "Get unlimited access to the website materials:",
           monthlyBilling: "Monthly billing",
           choosePlan: "Select plan",
           features: "Features",
@@ -364,9 +364,11 @@ i18n.use(initReactI18next).init({
           month: "month",
           additionalInfo:
             "You will also receive an invitation to a private channel and access.",
-          benefit1: "Unlimited access to view guides",
-          benefit2:
-            "Private channel and access to a closed section with projects with maximum potential",
+          benefit1: "Unlimited access to viewing guides",
+          benefit2: "Activity tracking",
+          benefit3: "Monitoring the progress of the farm and sub-accounts",
+          benefit4: "Notifications in the Telegram bot",
+          benefit5: "Help with the platform and activities",
           accountBalance: "Account balance",
           insufficientFunds:
             "There are not enough funds on your account to pay for the order.",
@@ -701,7 +703,7 @@ i18n.use(initReactI18next).init({
         blog: {
           title: "Блог",
           description:
-            "Отпразднуйте свое путешествие в web3. Выполняйте квесты и получайте дропы!",
+            "Отпразднуйте свое путешествие в Web3. Участвуйте в активностях и получайте награды!",
           search: "Поиск",
           articles: "статей",
           sortBy: "Сортировать по",
@@ -779,7 +781,7 @@ i18n.use(initReactI18next).init({
           sortBy: "Сортировать по",
           sortByDefault: "По умолчанию",
           sortByNewest: "По новизне",
-          sortByInvest: "По инвестициям",
+          sortByInvest: "Собрано, $",
           sortByPriority: "По приоритету",
           sortByScore: "По оценке",
           sortByNetwork: "По сети",
@@ -950,7 +952,7 @@ i18n.use(initReactI18next).init({
         },
         plansModal: {
           title: "Планы",
-          description: "Получите неограниченный доступ к материалам сайта",
+          description: "Получите неограниченный доступ к материалам сайта:",
           monthlyBilling: "Ежемесячный платеж",
           choosePlan: "Выберите план",
           features: "Возможности",
@@ -977,9 +979,11 @@ i18n.use(initReactI18next).init({
           additionalInfo:
             "Вы также получите приглашение в закрытый канал и доступ.",
           benefit1: "Неограниченный доступ к просмотру гайдов",
-          benefit2:
-            "Закрытый канал и доступ к закрытому разделу с проектами с максимальным потенциалом",
-          accountBalance: "Баланс аккаунта",
+          benefit2: "Трекинг активностей",
+          benefit3: "Мониторинг прогресса фермы и суб-аккаунтов",
+          benefit4: "Уведомления в Telegram-боте",
+          benefit5: "Неограниченный доступ к просмотру гайдов",
+          accountBalance: "Помощь по платформе и активностям",
           insufficientFunds:
             "На вашем счете недостаточно средств для оплаты заказа.",
           vpnTip1: "Совет: если вас блокируют во время оплаты -",

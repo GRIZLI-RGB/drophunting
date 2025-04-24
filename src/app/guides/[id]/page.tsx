@@ -26,6 +26,7 @@ import CalendarModal from "@/shared/components/CalendarModal";
 import { useTranslation } from "react-i18next";
 import ProgressBar from "@/app/components/ProgressBar";
 import clsx from "clsx";
+import { formatInvestmentAmount } from "@/shared/utils/formatters";
 
 const GuideDescription = ({ description }: { description: string }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -377,7 +378,7 @@ const Guide = () => {
                   {t("guideDetails.investment")}
                 </p>
                 <p className="text-[18px] leading-[22px] sm:text-[20px] sm:leading-[24px] font-bold truncate max-w-[100px]">
-                  {guideDetails.investments}
+                  {formatInvestmentAmount(guideDetails.investments)}
                 </p>
               </div>
               <div className="flex flex-col items-center gap-2">

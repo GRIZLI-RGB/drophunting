@@ -26,6 +26,7 @@ import CalendarModal from "@/shared/components/CalendarModal";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import Unauthorized from "@/shared/components/Unauthorized";
+import { formatInvestmentAmount } from "@/shared/utils/formatters";
 
 const CustomSlider = styled(Slider)({
   height: 8,
@@ -529,7 +530,7 @@ const Guides = () => {
                               {t("guides.investmentLabel")}
                             </p>
                             <p className="text-[16px] leading-[18px] font-bold truncate max-w-[100px]">
-                              {guide.investments}
+                              {formatInvestmentAmount(guide.investments)}
                             </p>
                           </div>
                           <div>

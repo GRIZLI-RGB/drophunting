@@ -270,11 +270,8 @@ export const PlansModal = ({ togglePlansModal }: PlansModalType) => {
               <p className="font-bold text-[22px] xl:text-[24px] sm:text-[26px] leading-[36px] -tracking-[3%]">
                 {t("plansModal.description")}
               </p>
-              <p className="font-semibold text-[13px] leading-[20px] text-[#949392] xl:w-[450px]">
-                {t("plansModal.additionalInfo")}
-              </p>
-              <div>
-                <div className="relative mb-5">
+              <div className="flex flex-col gap-5">
+                <div className="relative">
                   <MdOutlineDone
                     size={20}
                     className="text-[#CBFF51] absolute top-0 left-0"
@@ -290,6 +287,33 @@ export const PlansModal = ({ togglePlansModal }: PlansModalType) => {
                   />
                   <p className="font-semibold leading-[20px] px-[25px]">
                     {t("plansModal.benefit2")}
+                  </p>
+                </div>
+                <div className="relative">
+                  <MdOutlineDone
+                    size={20}
+                    className="text-[#CBFF51] absolute top-0 left-0"
+                  />
+                  <p className="font-semibold leading-[20px] px-[25px]">
+                    {t("plansModal.benefit3")}
+                  </p>
+                </div>
+                <div className="relative">
+                  <MdOutlineDone
+                    size={20}
+                    className="text-[#CBFF51] absolute top-0 left-0"
+                  />
+                  <p className="font-semibold leading-[20px] px-[25px]">
+                    {t("plansModal.benefit4")}
+                  </p>
+                </div>
+                <div className="relative">
+                  <MdOutlineDone
+                    size={20}
+                    className="text-[#CBFF51] absolute top-0 left-0"
+                  />
+                  <p className="font-semibold leading-[20px] px-[25px]">
+                    {t("plansModal.benefit5")}
                   </p>
                 </div>
               </div>

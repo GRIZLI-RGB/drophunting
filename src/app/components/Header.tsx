@@ -82,7 +82,7 @@ const Header = () => {
       name: t("header.blog"),
       href: "/blog",
     },
-    { name: t("header.store"), href: "/store" },
+    // { name: t("header.store"), href: "/store" },
   ];
 
   const [openModal, setOpenModal] = useState<string | null>(null);

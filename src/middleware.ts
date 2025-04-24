@@ -28,7 +28,7 @@ export function middleware(request: NextRequest) {
     "/progress",
     "/suggest-guide",
     "/favorites",
-    "/store",
+    // "/store",
   ]);
 
   const dynamicPublicRoutes = [
@@ -39,7 +39,7 @@ export function middleware(request: NextRequest) {
   const dynamicPrivateRoutes = [
     /^\/guides\/[a-zA-Z0-9_-]+$/,
     /^\/favorites\/.+$/,
-    /^\/store\/.+$/,
+    // /^\/store\/.+$/,
   ];
 
   const isPublicRoute =

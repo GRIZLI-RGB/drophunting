@@ -12,7 +12,7 @@ const Footer = () => {
         <MainLogo width={170} height={40} color="#fff" />
       </div>
       <Link
-        href="https://www.google.com"
+        href="https://t.me/help_dh"
         target="_blank"
         className="text-[14px] leading-[16px] text-center">
         {t("authFooter.support")}

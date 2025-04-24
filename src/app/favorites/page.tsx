@@ -24,6 +24,7 @@ import { FaAngleDown, FaAngleUp, FaCheck } from "react-icons/fa6";
 import CalendarModal from "@/shared/components/CalendarModal";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
+import { formatInvestmentAmount } from "@/shared/utils/formatters";
 
 const CustomSlider = styled(Slider)({
   height: 8,
@@ -436,7 +437,7 @@ const Favorites = () => {
                           {t("favorites.investmentLabel")}
                         </p>
                         <p className="text-[16px] leading-[18px] font-bold max-w-[100px] truncate">
-                          {guide.investments}
+                          {formatInvestmentAmount(guide.investments)}
                         </p>
                       </div>
                       <div>

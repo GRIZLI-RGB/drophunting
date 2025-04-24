@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BsTwitterX } from "react-icons/bs";
-import { FaCaretDown, FaDiscord, FaInstagram, FaCheck } from "react-icons/fa6";
+import { FaCaretDown, FaCheck } from "react-icons/fa6";
 import { GrLanguage } from "react-icons/gr";
 import { IoMdClose } from "react-icons/io";
 import { RiTelegram2Fill } from "react-icons/ri";
@@ -90,25 +90,29 @@ const LandingModal = ({
           <div className="flex items-center mb-[26px]">
             <div className="flex items-center gap-[20px]">
               <BsTwitterX
-                onClick={() => window.open("https://google.com", "_blank")}
+                onClick={() =>
+                  window.open("https://x.com/Drophunting_io", "_blank")
+                }
                 className="cursor-pointer hover:opacity-80 transition-opacity"
                 size={24}
               />
-              <FaDiscord
+              {/* <FaDiscord
                 onClick={() => window.open("https://google.com", "_blank")}
                 className="cursor-pointer hover:opacity-80 transition-opacity"
                 size={28}
-              />
+              /> */}
               <RiTelegram2Fill
-                onClick={() => window.open("https://google.com", "_blank")}
+                onClick={() =>
+                  window.open("https://t.me/drophunting_group", "_blank")
+                }
                 className="cursor-pointer hover:opacity-80 transition-opacity"
                 size={28}
               />
-              <FaInstagram
+              {/* <FaInstagram
                 onClick={() => window.open("https://google.com", "_blank")}
                 className="cursor-pointer hover:opacity-80 transition-opacity"
                 size={28}
-              />
+              /> */}
             </div>
           </div>
           <div className="relative">

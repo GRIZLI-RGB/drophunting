@@ -56,10 +56,10 @@ const NavigationModal = ({
       name: t("navigationModal.blog"),
       href: "/blog",
     },
-    {
-      name: t("navigationModal.store"),
-      href: "/store",
-    },
+    // {
+    //   name: t("navigationModal.store"),
+    //   href: "/store",
+    // },
   ];
 
   return (
@@ -159,12 +159,12 @@ const NavigationModal = ({
           )
         )}
         <div className="flex gap-2">
-          <Link href="https://www.google.com" target="_blank">
+          <Link href="https://t.me/drophunting_group" target="_blank">
             <div className="cursor-pointer">
               <RiTelegram2Fill size={28} />
             </div>
           </Link>
-          <Link href="https://www.google.com" target="_blank">
+          <Link href="https://x.com/Drophunting_io" target="_blank">
             <div className="cursor-pointer">
               <PiXLogo size={28} />
             </div>
