@@ -70,6 +70,7 @@ export type User = {
   plan_id: number | null;
   two_factor: boolean;
   telegram_bot_link: string;
+  verify_email: boolean;
 };
 
 type Plan = {
@@ -146,7 +147,9 @@ type Icon = {
 
 type Marker = {
   id: number;
-  title: string;
+  name: {
+    [key: string]: string;
+  };
   icon_id: number | null;
   highlighted: boolean;
   pivot: {
@@ -187,6 +190,8 @@ type GuideDetails = {
   link_telegram: string | null;
   link_x: string | null;
   spend: string | number | null;
+  status: string;
+  status_id: 1 | 2 | 3;
 };
 
 type TaskDetails = {
@@ -219,6 +224,8 @@ type Guide = {
     id: number;
     icon: string;
   } | null;
+  status: string;
+  status_id: 1 | 2 | 3;
 };
 
 type GuidesResponse = {
@@ -567,6 +574,13 @@ type SubaccountProjectTask = {
   users: SubaccountProjectTaskUser[];
 };
 
+type VerifyEmailParams = {
+  id: string | number;
+  hash: string;
+  expires: string;
+  signature: string;
+};
+
 type SubaccountProjectTasksResponse = {
   id: number;
   tasks_count: number;
@@ -724,6 +738,7 @@ type StoreState = {
   isLoadingSubaccountProjectTasks: boolean;
   subaccountProjectTasksError: string | null;
   fetchSubaccountProjectTasks: (projectId: number) => Promise<void>;
+  verifyEmail: (params: VerifyEmailParams) => Promise<boolean>;
 };
 
 const useStore = create<StoreState>()(
@@ -838,6 +853,29 @@ const useStore = create<StoreState>()(
         try {
           await axiosInstance.post<{ type: string; status: string }>(
             "/api/auth/two-factor/delete",
+          );
+
+          return true;
+        } catch (error) {
+          throw error;
+        }
+      },
+
+      verifyEmail: async ({
+        id,
+        hash,
+        expires,
+        signature,
+      }: VerifyEmailParams) => {
+        try {
+          await axiosInstance.get<{ status: string }>(
+            `/api/verify-email/${id}/${hash}`,
+            {
+              params: {
+                expires,
+                signature,
+              },
+            },
           );
 
           return true;
@@ -2097,6 +2135,7 @@ const useStore = create<StoreState>()(
                   userError?.response?.data
                 : // @ts-expect-error: ""
                   userError?.response?.data?.message || "Unknown error";
+
             throw userError;
           }
 

@@ -149,7 +149,7 @@ const ProfileModal = ({
             <p className="text-gray-400 text-sm truncate">{user?.email}</p>
           </div>
         </div>
-        {user && !user?.subaccount && (
+        {user && !user?.subaccount && user.verify_email && (
           <div
             className="flex lg:hidden items-center justify-center h-[40px] bg-[#24262A] py-[10px] pr-[17px] pl-[20px] rounded-[52px] cursor-pointer mt-[8px] mb-[16px]"
             onClick={handleBalanceClick}>

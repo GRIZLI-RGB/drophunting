@@ -12,6 +12,7 @@ import { Progress } from "@/shared/icons/Progress";
 import { useTranslation } from "react-i18next";
 import { IoMdClose } from "react-icons/io";
 import { FiCheck } from "react-icons/fi";
+import Unauthorized from "@/shared/components/Unauthorized";
 
 const SuggestGuide = () => {
   const { t } = useTranslation();
@@ -135,103 +136,111 @@ const SuggestGuide = () => {
             </OverlayScrollbarsComponent>
           </nav>
           <section className="w-full min-h-[1300px] bg-[--dark-gray] p-[32px] rounded-[16px]">
-            <div className="flex-col flex">
-              <div className="flex items-center justify-center w-[48px] h-[48px] bg-[#2A2B32] rounded-[12px]">
-                <GrBook size={24} />
-              </div>
-              <div className="mt-4 mb-[32px]">
-                <p className="text-[24px] font-semibold leading-[32px] tracking-[-3%] mb-2">
-                  {t("guides.title")}
-                </p>
-                <p className="text-[#949392] text-[14px] leading-[20px] sm:w-[450px] lg:w-[650px]">
-                  {t("suggestGuide.description")}
-                </p>
-              </div>
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <p className="text-[18px] leading-[32px] font-semibold">
-                  {t("suggestGuide.suggestTheGuide")}
-                </p>
-                <div className="max-w-[635px] w-full flex flex-col gap-4">
-                  <div className="flex flex-col gap-2">
-                    <label
-                      htmlFor="guide-name"
-                      className="text-[14px] leading-[16px]">
-                      {t("suggestGuide.nameOfGuide")}
-                    </label>
-                    <input
-                      id="guide-name"
-                      type="text"
-                      value={name}
-                      onChange={(e) => {
-                        if (e.target.value.length <= 255) {
-                          setName(e.target.value);
-                        }
-                      }}
-                      placeholder={t("suggestGuide.enterNamePlaceholder")}
-                      className={`w-full h-[48px] bg-[#292B2F] rounded-[14px] py-[12px] px-[16px] text-[14px] leading-[20px] text-white ${
-                        formErrors.name ? "border border-red-500" : ""
-                      }`}
-                    />
-                    {formErrors.name && (
-                      <span className="text-red-500 text-[12px]">
-                        {formErrors.name}
-                      </span>
-                    )}
-                    <div className="text-right">
-                      <span className="text-[12px] text-[#949392]">
-                        {name.length}/255
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <label
-                      htmlFor="guide-description"
-                      className="text-[14px] leading-[16px]">
-                      {t("suggestGuide.describeGuide")}
-                    </label>
-                    <div>
-                      <textarea
-                        id="guide-description"
-                        value={description}
+            {user?.verify_email ? (
+              <div className="flex-col flex">
+                <div className="flex items-center justify-center w-[48px] h-[48px] bg-[#2A2B32] rounded-[12px]">
+                  <GrBook size={24} />
+                </div>
+                <div className="mt-4 mb-[32px]">
+                  <p className="text-[24px] font-semibold leading-[32px] tracking-[-3%] mb-2">
+                    {t("guides.title")}
+                  </p>
+                  <p className="text-[#949392] text-[14px] leading-[20px] sm:w-[450px] lg:w-[650px]">
+                    {t("suggestGuide.description")}
+                  </p>
+                </div>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                  <p className="text-[18px] leading-[32px] font-semibold">
+                    {t("suggestGuide.suggestTheGuide")}
+                  </p>
+                  <div className="max-w-[635px] w-full flex flex-col gap-4">
+                    <div className="flex flex-col gap-2">
+                      <label
+                        htmlFor="guide-name"
+                        className="text-[14px] leading-[16px]">
+                        {t("suggestGuide.nameOfGuide")}
+                      </label>
+                      <input
+                        id="guide-name"
+                        type="text"
+                        value={name}
                         onChange={(e) => {
-                          if (e.target.value.length <= 800) {
-                            setDescription(e.target.value);
+                          if (e.target.value.length <= 255) {
+                            setName(e.target.value);
                           }
                         }}
-                        className={`w-full min-h-[160px] h-full bg-[#292B2F] py-[12px] px-[16px] rounded-[10px] resize-none overflow-auto text-white ${
-                          formErrors.description ? "border border-red-500" : ""
+                        placeholder={t("suggestGuide.enterNamePlaceholder")}
+                        className={`w-full h-[48px] bg-[#292B2F] rounded-[14px] py-[12px] px-[16px] text-[14px] leading-[20px] text-white ${
+                          formErrors.name ? "border border-red-500" : ""
                         }`}
-                        placeholder={t("suggestGuide.describeIdeaPlaceholder")}
                       />
-                      {formErrors.description && (
+                      {formErrors.name && (
                         <span className="text-red-500 text-[12px]">
-                          {formErrors.description}
+                          {formErrors.name}
                         </span>
                       )}
+                      <div className="text-right">
+                        <span className="text-[12px] text-[#949392]">
+                          {name.length}/255
+                        </span>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <span className="text-[12px] text-[#949392]">
-                        {description.length}/800
-                      </span>
-                    </div>
-                  </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSuggestingGuide}
-                    className={`w-fit h-[44px] font-sans font-semibold ${
-                      isSuggestingGuide
-                        ? "bg-[#0E9900] opacity-70"
-                        : "bg-[#11CA00]"
-                    } rounded-[14px] px-[20px] py-[14px] flex items-center justify-center text-[15px] leading-[16px] text-white`}>
-                    {isSuggestingGuide
-                      ? t("suggestGuide.sending")
-                      : t("suggestGuide.send")}
-                  </button>
-                </div>
-              </form>
-            </div>
+                    <div className="flex flex-col gap-2">
+                      <label
+                        htmlFor="guide-description"
+                        className="text-[14px] leading-[16px]">
+                        {t("suggestGuide.describeGuide")}
+                      </label>
+                      <div>
+                        <textarea
+                          id="guide-description"
+                          value={description}
+                          onChange={(e) => {
+                            if (e.target.value.length <= 800) {
+                              setDescription(e.target.value);
+                            }
+                          }}
+                          className={`w-full min-h-[160px] h-full bg-[#292B2F] py-[12px] px-[16px] rounded-[10px] resize-none overflow-auto text-white ${
+                            formErrors.description
+                              ? "border border-red-500"
+                              : ""
+                          }`}
+                          placeholder={t(
+                            "suggestGuide.describeIdeaPlaceholder",
+                          )}
+                        />
+                        {formErrors.description && (
+                          <span className="text-red-500 text-[12px]">
+                            {formErrors.description}
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-right">
+                        <span className="text-[12px] text-[#949392]">
+                          {description.length}/800
+                        </span>
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={isSuggestingGuide}
+                      className={`w-fit h-[44px] font-sans font-semibold ${
+                        isSuggestingGuide
+                          ? "bg-[#0E9900] opacity-70"
+                          : "bg-[#11CA00]"
+                      } rounded-[14px] px-[20px] py-[14px] flex items-center justify-center text-[15px] leading-[16px] text-white`}>
+                      {isSuggestingGuide
+                        ? t("suggestGuide.sending")
+                        : t("suggestGuide.send")}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            ) : (
+              <Unauthorized />
+            )}
           </section>
         </div>
       </main>

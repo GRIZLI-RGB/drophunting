@@ -36,11 +36,12 @@ export function validateAmount(
     };
   }
 
-  if (numValue <= 0) {
+  if (numValue < 1) {
+    console.log({ numValue, cleanValue });
     return {
       isValid: false,
       amount: null,
-      error: i18n.t("validation.amountGreaterThanZero"),
+      error: i18n.t("validation.amountMin"),
     };
   }
 

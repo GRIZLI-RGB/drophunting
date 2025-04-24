@@ -12,7 +12,7 @@ const PasswordResetHandler = () => {
   const { t } = useTranslation();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const token = pathname.slice(16);
+  const token = pathname.split("/")[2];
   const email = searchParams.get("email");
 
   const [password, setPassword] = useState("");

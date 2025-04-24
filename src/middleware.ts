@@ -43,6 +43,8 @@ export function middleware(request: NextRequest) {
   ];
 
   const isPublicRoute =
+    pathname.includes("verify-email") ||
+    pathname.includes("password-reset") ||
     publicRoutes.has(pathname) ||
     dynamicPublicRoutes.some((pattern) => pattern.test(pathname));
 

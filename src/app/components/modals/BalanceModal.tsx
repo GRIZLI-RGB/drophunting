@@ -4,6 +4,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import useStore from "@/shared/store";
 import { validateAmount, formatAmount } from "@/shared/utils/validation";
+import clsx from "clsx";
 
 type BalanceModalType = {
   toggleBalanceModal: () => void;
@@ -24,20 +25,51 @@ const BalanceModal = ({ toggleBalanceModal }: BalanceModalType) => {
     setSelected(type);
   };
 
+  // const handleInputBalanceChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const rawValue = e.target.value;
+  //   setInputValue(rawValue);
+
+  //   const validation = validateAmount(rawValue, selected as "Fiat" | "Crypto");
+  //   if (validation.isValid && validation.amount !== null) {
+  //     setAmount(validation.amount);
+  //     setError(undefined);
+  //   } else {
+  //     setError(validation.error);
+  //     if (rawValue === "") {
+  //       setAmount(0);
+  //       setInputValue("0");
+  //     }
+  //   }
+  // };
+
+  // const handleInputBalanceChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const rawValue = e.target.value.replace(/,/g, ".");
+  //   setInputValue(rawValue);
+
+  //   const validation = validateAmount(rawValue, selected as "Fiat" | "Crypto");
+  //   if (validation.isValid && validation.amount !== null) {
+  //     setAmount(validation.amount);
+  //     setError(undefined);
+  //   } else {
+  //     setError(validation.error);
+  //     if (rawValue === "") {
+  //       setAmount(0);
+  //       setInputValue("0");
+  //     }
+  //   }
+  // };
+
   const handleInputBalanceChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const rawValue = e.target.value;
+    const rawValue = e.target.value.replace(/,/g, ".");
     setInputValue(rawValue);
 
     const validation = validateAmount(rawValue, selected as "Fiat" | "Crypto");
-    if (validation.isValid && validation.amount !== null) {
-      setAmount(validation.amount);
+    if (validation.isValid) {
+      setAmount(validation.amount !== null ? validation.amount : 0);
       setError(undefined);
     } else {
       setError(validation.error);
-      if (rawValue === "") {
-        setAmount(0);
-        setInputValue("0");
-      }
+      setAmount(0); // Устанавливаем amount в 0 при невалидном вводе или пустой строке
     }
   };
 
@@ -115,19 +147,31 @@ const BalanceModal = ({ toggleBalanceModal }: BalanceModalType) => {
           <p className="font-semibold leading-[16px]">
             {t("balanceModal.amount")}
           </p>
-          <input
-            type="text"
-            className={`bg-[#292B2F] border-[1px] ${
-              error ? "border-red-500" : "border-transparent"
-            } py-[12px] px-[16px] rounded-[14px] mt-2 w-full focus:border-[1px] ${
-              error ? "focus:border-red-500" : "focus:border-gray-500"
-            } focus:outline-none`}
-            value={isFocused ? inputValue : formatAmount(amount)}
-            onChange={handleInputBalanceChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            placeholder={t("balanceModal.enterAmount")}
-          />
+
+          <div
+            className={clsx(
+              "flex items-center gap-1.5 bg-[#292B2F] border-[1px] py-[12px] px-[16px] rounded-[14px] mt-2 w-full focus:border-[1px]",
+              isFocused
+                ? error
+                  ? "border-red-500"
+                  : "border-gray-500"
+                : error
+                  ? "border-red-500"
+                  : "border-transparent",
+            )}>
+            <span>$</span>
+
+            <input
+              className="bg-transparent focus:outline-none w-full"
+              type="text"
+              value={inputValue}
+              onChange={handleInputBalanceChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder={t("balanceModal.enterAmount")}
+            />
+          </div>
+
           {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
         </div>
         <button

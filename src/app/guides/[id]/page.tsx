@@ -25,6 +25,7 @@ import useStore from "@/shared/store";
 import CalendarModal from "@/shared/components/CalendarModal";
 import { useTranslation } from "react-i18next";
 import ProgressBar from "@/app/components/ProgressBar";
+import clsx from "clsx";
 
 const GuideDescription = ({ description }: { description: string }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -263,10 +264,20 @@ const Guide = () => {
                 <div className="flex items-center gap-[8px]">
                   <div className="flex items-center gap-[6px]">
                     <div>
-                      <GoDotFill size={16} className="text-[#C9FF4A]" />
+                      <GoDotFill
+                        size={16}
+                        className={clsx(
+                          {
+                            1: "text-green-500",
+                            2: "text-yellow-500",
+                            3: "text-red-500",
+                          }[guideDetails.status_id],
+                        )}
+                      />
                     </div>
                     <p className="text-[14px] leading-[16px] font-bold">
-                      {t("guideDetails.actual")}
+                      {/* {t("guideDetails.actual")} */}
+                      {guideDetails.status}
                     </p>
                   </div>
                   <div>
@@ -286,6 +297,7 @@ const Guide = () => {
                     {guideDetails.time} {t("guideDetails.minutes")}
                   </p>
                 </div>
+
                 {guideDetails.markers.map((marker) => (
                   <div
                     key={marker.id}
@@ -297,7 +309,7 @@ const Guide = () => {
                     {marker.icon && (
                       <Image
                         src={getImageUrl(marker.icon.path)}
-                        alt={marker.title}
+                        alt={""}
                         width={16}
                         height={16}
                         className="mr-1"
@@ -310,7 +322,7 @@ const Guide = () => {
                           : ""
                       }>
                       <p className="text-[14px] leading-[16px] font-semibold truncate max-w-[100px]">
-                        {marker.title}
+                        {marker.name[i18n.language]}
                       </p>
                     </span>
                   </div>

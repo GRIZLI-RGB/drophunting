@@ -356,14 +356,14 @@ const Favorites = () => {
                             {marker.icon && (
                               <Image
                                 src={getImageUrl(marker.icon.path)}
-                                alt={marker.title}
+                                alt={""}
                                 width={12}
                                 height={12}
                                 className="w-[12px] h-[12px]"
                               />
                             )}
                             <p className="text-[12px] leading-[14px] sm:text-[13px] sm:leading-[16px] font-semibold text-[#A0A8AE] max-w-[100px] truncate">
-                              {marker.title}
+                              {marker.name[i18n.language]}
                             </p>
                           </div>
                         ))}
@@ -476,7 +476,15 @@ const Favorites = () => {
                         {t("favorites.lastUpdates")}: {guide.updated}
                       </p>
                       <MdOutlineKeyboardArrowRight size={20} />
-                      <GoDotFill className="text-red-500" />
+                      <GoDotFill
+                        className={clsx(
+                          {
+                            1: "text-green-500",
+                            2: "text-yellow-500",
+                            3: "text-red-500",
+                          }[guide.status_id],
+                        )}
+                      />
                     </div>
                   </div>
                 </div>

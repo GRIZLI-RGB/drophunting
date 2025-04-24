@@ -35,12 +35,15 @@ import greenTether from "../../../public/assets/green-tether.png";
 import LandingModal from "../components/modals/LandingModal";
 import { MainLogo } from "@/shared/icons/MainLogo";
 import "../../../public/fonts/stylesheet.css";
+import clsx from "clsx";
 
 const Landing = () => {
   const [isLandingModalOpen, setIsLandingModalOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
+
+  const [numberRewards, setNumberRewards] = useState(9);
 
   const aboutSectionRef = useRef<HTMLDivElement>(null);
   const resultsSectionRef = useRef<HTMLDivElement>(null);
@@ -409,15 +412,15 @@ const Landing = () => {
 
         <div className="relative z-0 mt-[50px] flex flex-wrap items-center gap-[8px] md:gap-[12px] lg:gap-[25px]">
           <Image
-            className="absolute top-[-130px] left-[-100px] md:left-[-200px] lg:left-[-250px] xl:left-[-300px] h-[900px] z-[-10] rotate-180"
+            className="pointer-events-none absolute top-[-130px] left-[-100px] md:left-[-200px] lg:left-[-250px] xl:left-[-300px] h-[900px] z-[-10] rotate-180"
             src={greenBlur}
             alt="Green Blur"
           />
 
           <div className="flex flex-wrap items-center justify-center gap-[8px] md:gap-[12px] lg:gap-[25px]">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((el) => (
+            {[...new Array(numberRewards)].map((_, index) => (
               <div
-                key={el}
+                key={index}
                 className="w-[159px] h-[171px] md:w-[334px] md:h-[158px] lg:w-[356px] lg:h-[189px] bg-[#1F2027AB] rounded-[16px] px-[12px] py-[14px] md:p-[20px] lg:p-[25px] z-10 relative">
                 <div className="flex flex-col md:flex-row md:items-center gap-[20px] md:gap-[24px] mb-[20px] lg:mb-[24px]">
                   <div>
@@ -459,28 +462,34 @@ const Landing = () => {
           </div>
 
           <Image
-            className="absolute top-[-40px] sm:top-[-80px] left-[-40px] lg:top-[-150px] sm:left-[-65px] lg:left-[-90px] w-[57px] h-[57px] sm:w-[88px] lg:w-[100px] sm:h-[88px] lg:h-[100px]"
+            className="pointer-events-none absolute top-[-40px] sm:top-[-80px] left-[-40px] lg:top-[-150px] sm:left-[-65px] lg:left-[-90px] w-[57px] h-[57px] sm:w-[88px] lg:w-[100px] sm:h-[88px] lg:h-[100px]"
             src={bitcoin}
             alt="Bitcoin"
           />
           <Image
-            className="hidden sm:block absolute sm:top-[-110px] right-[-70px] lg:right-[-150px] sm:w-[105px] lg:w-[180px] sm:h-[105px] lg:h-[180px]"
+            className="pointer-events-none hidden sm:block absolute sm:top-[-110px] right-[-70px] lg:right-[-150px] sm:w-[105px] lg:w-[180px] sm:h-[105px] lg:h-[180px]"
             src={dollar}
             alt="Dollar"
           />
           <Image
-            className="absolute bottom-[-50px] sm:bottom-[-110px] left-[-30px] sm:left-[-70px] lg:left-[-120px] xl:left-[-160px] w-[55px] h-[55px] sm:w-[105px] lg:w-[120px] sm:h-[105px] lg:h-[120px]"
+            className="pointer-events-none absolute bottom-[-50px] sm:bottom-[-110px] left-[-30px] sm:left-[-70px] lg:left-[-120px] xl:left-[-160px] w-[55px] h-[55px] sm:w-[105px] lg:w-[120px] sm:h-[105px] lg:h-[120px]"
             src={ethereum}
             alt="Ethereum"
           />
           <Image
-            className="absolute bottom-[-50px] sm:bottom-[-100px] right-[-10px] sm:right-[-40px] lg:right-[-110px] w-[62px] h-[62px] sm:w-[138px] sm:h-[138px] lg:w-[165px] lg:h-[165px]"
+            className="pointer-events-none absolute bottom-[-50px] sm:bottom-[-100px] right-[-10px] sm:right-[-40px] lg:right-[-110px] w-[62px] h-[62px] sm:w-[138px] sm:h-[138px] lg:w-[165px] lg:h-[165px]"
             src={coin}
             alt="Coin"
           />
         </div>
-        <div className="flex items-center justify-center">
-          <button className="flex items-center justify-center bg-white rounded-[12px] px-[16px] py-[10px] h-[57px] min-w-[185px] cursor-pointer mt-[50px] hover:bg-opacity-90">
+        <div
+          className={clsx(
+            "flex items-center justify-center",
+            numberRewards === 14 && "opacity-0 pointer-events-none",
+          )}>
+          <button
+            onClick={() => setNumberRewards((prev) => prev + 5)}
+            className="z-[4] flex items-center justify-center bg-white rounded-[12px] px-[16px] py-[10px] h-[57px] min-w-[185px] cursor-pointer mt-[50px] hover:bg-opacity-90">
             <p className="text-[14px] leading-[16px] text-black">
               {t("landing.showMore")}
             </p>
@@ -488,7 +497,7 @@ const Landing = () => {
         </div>
 
         <Image
-          className="absolute top-[10px] lg:top-[30px] right-[-10px] sm:right-[30px] md:right-[10px] lg:right-[70px] xl:right-[140px] w-[145px] md:w-[217px] lg:w-[297px] -rotate-12"
+          className="pointer-events-none absolute top-[10px] lg:top-[30px] right-[-10px] sm:right-[30px] md:right-[10px] lg:right-[70px] xl:right-[140px] w-[145px] md:w-[217px] lg:w-[297px] -rotate-12"
           src={paint}
           alt="Paint"
         />

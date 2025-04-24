@@ -12,7 +12,7 @@ export const MainLogo = ({
   className?: string;
 }) => {
   return (
-    <Link href="/guides">
+    <Link href="https://app.drophunting.io/guides">
       <svg
         className={className}
         width={width}

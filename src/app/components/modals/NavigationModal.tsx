@@ -137,7 +137,8 @@ const NavigationModal = ({
           </div>
         ) : (
           user &&
-          !user?.subaccount && (
+          !user?.subaccount &&
+          user.verify_email && (
             <div className="p-[8px] w-full">
               <button
                 className="flex w-full items-center gap-1 bg-gradient-to-r from-[#C3FF361C] to-[#00AFB81C] p-2 rounded-lg h-[40px] justify-center"

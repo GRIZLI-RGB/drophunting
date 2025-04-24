@@ -15,6 +15,7 @@ i18n.use(initReactI18next).init({
           back: "Back",
           good: "Good",
           tryAgain: "Try again",
+          unauthorized: "Unauthorized",
         },
         authHeader: {
           back: "Back to site",
@@ -604,6 +605,7 @@ i18n.use(initReactI18next).init({
         validation: {
           onlyOneDecimalPoint: "Only one decimal point is allowed",
           amountRequired: "Amount is required",
+          amountMin: "Amount must be at least $1",
           enterValidNumber: "Please enter a valid number",
           amountGreaterThanZero: "Amount must be greater than 0",
           maxTwoDecimalPlaces: "Maximum 2 decimal places allowed",
@@ -620,6 +622,7 @@ i18n.use(initReactI18next).init({
           back: "Назад",
           good: "Хорошо",
           tryAgain: "Попробуйте ещё раз",
+          unauthorized: "Не авторизован",
         },
         authHeader: {
           back: "Назад на сайт",
@@ -1215,6 +1218,7 @@ i18n.use(initReactI18next).init({
         validation: {
           onlyOneDecimalPoint: "Допускается только одна десятичная точка",
           amountRequired: "Требуется указать сумму",
+          amountMin: "Сумма не должна быть меньше 1$",
           enterValidNumber: "Пожалуйста, введите корректное число",
           amountGreaterThanZero: "Сумма должна быть больше 0",
           maxTwoDecimalPlaces: "Максимально допустимо 2 знака после запятой",

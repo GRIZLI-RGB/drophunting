@@ -171,7 +171,7 @@ const Header = () => {
                 className="text-[#9EA0A6] cursor-pointer"
               />
             </div>
-            {user && !user?.subaccount && (
+            {user && !user?.subaccount && user.verify_email && (
               <button
                 className="hidden lg:flex items-center gap-1 bg-gradient-to-r from-[#C3FF361C] to-[#00AFB81C] p-2 rounded-lg h-[40px]"
                 onClick={togglePlansModal}>
@@ -188,7 +188,7 @@ const Header = () => {
           </>
         )}
 
-        {user && !user?.subaccount && (
+        {user && !user?.subaccount && user.verify_email && (
           <div
             className="hidden lg:flex items-center justify-center h-[40px] bg-[--dark-gray] py-[10px] pr-[17px] pl-[20px] rounded-[52px] cursor-pointer"
             onClick={toggleBalanceModal}>
