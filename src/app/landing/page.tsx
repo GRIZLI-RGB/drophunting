@@ -412,7 +412,7 @@ const Landing = () => {
 
         <div className="relative z-0 mt-[50px] flex flex-wrap items-center gap-[8px] md:gap-[12px] lg:gap-[25px]">
           <Image
-            className="absolute top-[-130px] left-[-100px] md:left-[-200px] lg:left-[-250px] xl:left-[-300px] h-[900px] z-[-10] rotate-180"
+            className="pointer-events-none absolute top-[-130px] left-[-100px] md:left-[-200px] lg:left-[-250px] xl:left-[-300px] h-[900px] z-[-10] rotate-180"
             src={greenBlur}
             alt="Green Blur"
           />
@@ -489,7 +489,7 @@ const Landing = () => {
           )}>
           <button
             onClick={() => setNumberRewards((prev) => prev + 5)}
-            className="flex items-center justify-center bg-white rounded-[12px] px-[16px] py-[10px] h-[57px] min-w-[185px] cursor-pointer mt-[50px] hover:bg-opacity-90">
+            className="z-[4] flex items-center justify-center bg-white rounded-[12px] px-[16px] py-[10px] h-[57px] min-w-[185px] cursor-pointer mt-[50px] hover:bg-opacity-90">
             <p className="text-[14px] leading-[16px] text-black">
               {t("landing.showMore")}
             </p>
@@ -497,7 +497,7 @@ const Landing = () => {
         </div>
 
         <Image
-          className="absolute top-[10px] lg:top-[30px] right-[-10px] sm:right-[30px] md:right-[10px] lg:right-[70px] xl:right-[140px] w-[145px] md:w-[217px] lg:w-[297px] -rotate-12"
+          className="pointer-events-none absolute top-[10px] lg:top-[30px] right-[-10px] sm:right-[30px] md:right-[10px] lg:right-[70px] xl:right-[140px] w-[145px] md:w-[217px] lg:w-[297px] -rotate-12"
           src={paint}
           alt="Paint"
         />

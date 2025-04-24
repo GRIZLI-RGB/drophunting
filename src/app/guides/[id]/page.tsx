@@ -309,7 +309,7 @@ const Guide = () => {
                     {marker.icon && (
                       <Image
                         src={getImageUrl(marker.icon.path)}
-                        alt={marker.title}
+                        alt={""}
                         width={16}
                         height={16}
                         className="mr-1"
@@ -322,7 +322,7 @@ const Guide = () => {
                           : ""
                       }>
                       <p className="text-[14px] leading-[16px] font-semibold truncate max-w-[100px]">
-                        {marker.title}
+                        {marker.name[i18n.language]}
                       </p>
                     </span>
                   </div>
