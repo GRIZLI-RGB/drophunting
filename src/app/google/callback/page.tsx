@@ -1,10 +1,11 @@
 "use client";
-
+import Cookies from "js-cookie";
 import { AuthenticatorVerificationModal } from "@/app/components/modals/AuthenticatorVerificationModal";
 import { updateAxiosToken } from "@/shared/api/axios";
-import useStore from "@/shared/store";
+import useStore, { User } from "@/shared/store";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import axiosInstance from "@/shared/api/axios";
 
 export default function GoogleCallback() {
   const { googleLogin, setIsLoading } = useStore();
@@ -15,6 +16,7 @@ export default function GoogleCallback() {
 
   const [bannedMessage, setBannedMessage] = useState<string | false>(false);
   const [needs2FA, setNeeds2FA] = useState(false);
+  const { updateUser } = useStore();
 
   useEffect(() => {
     setIsLoading(true);
@@ -27,11 +29,30 @@ export default function GoogleCallback() {
 
       if (accessToken) {
         updateAxiosToken(accessToken);
-        console.log({ accessToken });
 
         googleLogin(accessToken)
-          .then(() => {
-            window.location.href = "https://app.drophunting.io/guides";
+          .then(async () => {
+            const token = Cookies.get("auth-token");
+            const selectedLanguage = Cookies.get("language");
+
+            if (token) {
+              try {
+                updateAxiosToken(token);
+                const { data } = await axiosInstance.get<User>("/api/user");
+
+                if (data) {
+                  updateUser({
+                    lang: selectedLanguage,
+                  });
+                }
+
+                setTimeout(() => {
+                  window.location.href = "https://app.drophunting.io/guides";
+                }, 100);
+              } catch (error) {
+                console.error("Error fetching user data:", error);
+              }
+            }
           })
           .catch((err) => {
             console.log(err.errorMessage);

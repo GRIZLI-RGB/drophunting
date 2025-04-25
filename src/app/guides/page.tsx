@@ -272,8 +272,8 @@ const Guides = () => {
         </p>
         {!user || user.verify_email ? (
           <>
-            <div className="mt-[40px] flex flex-col xl:flex-row xl:items-center xl:justify-between">
-              <div className="w-full overflow-x-auto" ref={scrollRef}>
+            <div className="mt-[40px] flex flex-col xl:flex-row xl:items-center xl:justify-between gap-[20px]">
+              <div className="w-full overflow-x-auto xl:pb-5" ref={scrollRef}>
                 {isLoadingTags ? (
                   <div className="flex items-center justify-center py-4">
                     <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-[#CBFF51]"></div>
@@ -304,7 +304,7 @@ const Guides = () => {
                   </div>
                 )}
               </div>
-              <div className="relative text-[#848487] z-0">
+              <div className="relative text-[#848487] z-0 xl:pb-5">
                 <IoSearchOutline
                   className="absolute top-3 left-3 cursor-pointer"
                   size={16}
