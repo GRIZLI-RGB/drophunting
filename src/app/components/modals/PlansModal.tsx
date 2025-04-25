@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { CiCircleInfo } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
 import { MdOutlineDone, MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { validateAmount, formatAmount } from "@/shared/utils/validation";
+import { validateAmount } from "@/shared/utils/validation";
 import useStore from "@/shared/store";
 import { useTranslation } from "react-i18next";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
@@ -125,7 +125,7 @@ export const PlansModal = ({ togglePlansModal }: PlansModalType) => {
   const handleInputBlur = () => {
     setIsFocused(false);
     if (!error && amount > 0) {
-      setInputValue(formatAmount(amount));
+      setInputValue(amount.toString());
     }
   };
 

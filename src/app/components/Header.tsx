@@ -158,12 +158,17 @@ const Header = () => {
 
         {user && (
           <>
-            <Badge
-              dot={(user?.notifications || 0) > 0}
-              onClick={toggleNotificationsModal}
-              className="cursor-pointer">
-              <IoMdNotificationsOutline size={20} className="text-[#9EA0A6]" />
-            </Badge>
+            {user?.verify_email && (
+              <Badge
+                dot={(user?.notifications || 0) > 0}
+                onClick={toggleNotificationsModal}
+                className="cursor-pointer">
+                <IoMdNotificationsOutline
+                  size={20}
+                  className="text-[#9EA0A6]"
+                />
+              </Badge>
+            )}
             <div>
               <MdFavoriteBorder
                 onClick={() => router.push("/favorites")}

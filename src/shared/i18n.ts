@@ -15,7 +15,7 @@ i18n.use(initReactI18next).init({
           back: "Back",
           good: "Good",
           tryAgain: "Try again",
-          unauthorized: "Unauthorized",
+          verify: "Confirm the email",
         },
         authHeader: {
           back: "Back to site",
@@ -624,7 +624,7 @@ i18n.use(initReactI18next).init({
           back: "Назад",
           good: "Хорошо",
           tryAgain: "Попробуйте ещё раз",
-          unauthorized: "Не авторизован",
+          verify: "Подтвердите почту",
         },
         authHeader: {
           back: "Назад на сайт",

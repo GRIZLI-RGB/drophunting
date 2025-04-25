@@ -3,7 +3,7 @@ import { IoMdClose } from "react-icons/io";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import useStore from "@/shared/store";
-import { validateAmount, formatAmount } from "@/shared/utils/validation";
+import { validateAmount } from "@/shared/utils/validation";
 import clsx from "clsx";
 
 type BalanceModalType = {
@@ -46,7 +46,7 @@ const BalanceModal = ({ toggleBalanceModal }: BalanceModalType) => {
   //   const rawValue = e.target.value.replace(/,/g, ".");
   //   setInputValue(rawValue);
 
-  //   const validation = validateAmount(rawValue, selected as "Fiat" | "Crypto");
+  //   const validation = validateAmount(rawValue, selected as "Fiat" | "Crypto");x
   //   if (validation.isValid && validation.amount !== null) {
   //     setAmount(validation.amount);
   //     setError(undefined);
@@ -69,7 +69,7 @@ const BalanceModal = ({ toggleBalanceModal }: BalanceModalType) => {
       setError(undefined);
     } else {
       setError(validation.error);
-      setAmount(0); // Устанавливаем amount в 0 при невалидном вводе или пустой строке
+      setAmount(0);
     }
   };
 
@@ -80,7 +80,7 @@ const BalanceModal = ({ toggleBalanceModal }: BalanceModalType) => {
   const handleInputBlur = () => {
     setIsFocused(false);
     if (!error && amount > 0) {
-      setInputValue(formatAmount(amount));
+      setInputValue(amount.toString());
     }
   };
 

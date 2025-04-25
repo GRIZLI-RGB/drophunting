@@ -10,7 +10,7 @@ export default function Unauthorized({ cn }: { cn?: string }) {
         "rounded-lg text-red-500 border border-red-500 bg-red-500/10 px-3.5 py-2 inline-flex",
         cn,
       )}>
-      {t("common.unauthorized")}
+      {t("common.verify")}
     </div>
   );
 }

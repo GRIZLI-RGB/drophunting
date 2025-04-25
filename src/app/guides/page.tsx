@@ -270,7 +270,7 @@ const Guides = () => {
         <p className="text-[16px] leading-[22px] text-[#B0B0B0] mt-[20px]">
           {t("guides.description")}
         </p>
-        {user?.verify_email ? (
+        {!user || user.verify_email ? (
           <>
             <div className="mt-[40px] flex flex-col xl:flex-row xl:items-center xl:justify-between">
               <div className="w-full overflow-x-auto" ref={scrollRef}>
