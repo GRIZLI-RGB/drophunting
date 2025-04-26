@@ -2146,6 +2146,9 @@ const useStore = create<StoreState>()(
       },
       login: async (data: LoginParams) => {
         set({ authErrors: {}, authLoading: true });
+
+        let errorMessage = "Unknown error";
+
         try {
           const response = await axiosInstance.post<{
             token: string;
@@ -2170,8 +2173,39 @@ const useStore = create<StoreState>()(
                 Cookies.remove("language", { path: "/" });
               }
             } catch (userError) {
-              console.warn("Error fetching user after login:", userError);
-              set({ sessionVerified: false, user: null });
+              const err = userError as {
+                response?: { status?: number; data?: { message?: string } };
+              };
+
+              if (
+                err.response?.status === 403 ||
+                err.response?.status === 422
+              ) {
+                errorMessage =
+                  err.response?.status === 403 &&
+                  typeof err?.response?.data === "string"
+                    ? err?.response?.data
+                    : (err?.response?.data?.message || "Unknown error") ===
+                        "Эти учетные данные не соответствуют нашим записям.."
+                      ? "This login and password does not exist, please try again or register a new profile"
+                      : "Unknown error";
+                set({
+                  authErrors: { global: errorMessage },
+                  sessionVerified: false,
+                  user: null,
+                });
+              } else {
+                set({ sessionVerified: false, user: null });
+              }
+              console.log("Метка 7");
+              updateAxiosToken(null);
+              Cookies.remove("auth-token");
+
+              throw {
+                errorMessage:
+                  errorMessage ||
+                  "This login and password does not exist, please try again or register a new profile",
+              };
             }
           }
 
