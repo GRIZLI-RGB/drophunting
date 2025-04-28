@@ -75,7 +75,3 @@ export function validateAmount(
     amount: numValue,
   };
 }
-
-export function formatAmount(value: number): string {
-  return value.toFixed(2);
-}
