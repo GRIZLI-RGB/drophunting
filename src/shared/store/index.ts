@@ -4,6 +4,7 @@ import axiosInstance, { update2FA, updateAxiosToken } from "../api/axios";
 import Cookies from "js-cookie";
 import { t } from "i18next";
 import i18n from "i18next";
+import { parseInvestmentAmount } from "@/shared/utils/formatters";
 
 type AuthErrors = {
   name?: string[];
@@ -1453,9 +1454,13 @@ const useStore = create<StoreState>()(
             if (params.search) queryParams.append("search", params.search);
             if (params.favorites !== undefined)
               queryParams.append("favorites", params.favorites.toString());
-            if (params.sorting)
+
+            // We'll handle "invest" sorting client-side
+            const isInvestmentSorting = params.type_sorting === "invest";
+
+            if (params.sorting && !isInvestmentSorting)
               queryParams.append("sorting", params.sorting.toString());
-            if (params.type_sorting)
+            if (params.type_sorting && !isInvestmentSorting)
               queryParams.append("type_sorting", params.type_sorting);
           }
 
@@ -1464,11 +1469,34 @@ const useStore = create<StoreState>()(
 
           const response = await axiosInstance.get<GuidesResponse>(url);
 
-          set({
-            guides: response.data,
-            isLoadingGuides: false,
-            guidesError: null,
-          });
+          // Handle investment sorting client-side
+          if (params?.type_sorting === "invest") {
+            const sortedData = [...response.data.data].sort((a, b) => {
+              const investmentA = parseInvestmentAmount(a.investments);
+              const investmentB = parseInvestmentAmount(b.investments);
+
+              return params.sorting === 1
+                ? investmentA - investmentB // asc
+                : investmentB - investmentA; // desc
+            });
+
+            const sortedResponse = {
+              ...response.data,
+              data: sortedData,
+            };
+
+            set({
+              guides: sortedResponse,
+              isLoadingGuides: false,
+              guidesError: null,
+            });
+          } else {
+            set({
+              guides: response.data,
+              isLoadingGuides: false,
+              guidesError: null,
+            });
+          }
         } catch (error) {
           console.error("Error fetching guides:", error);
           let errorMessage = "Failed to load guides";

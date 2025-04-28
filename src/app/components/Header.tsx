@@ -144,12 +144,12 @@ const Header = () => {
 
       <div className="flex items-center gap-3 md:gap-5">
         <div className="gap-2 hidden lg:flex">
-          <Link href="https://www.google.com" target="_blank">
+          <Link href="http://t.me/drophunting_group" target="_blank">
             <div className="cursor-pointer">
               <RiTelegram2Fill size={20} />
             </div>
           </Link>
-          <Link href="https://www.google.com" target="_blank">
+          <Link href="https://x.com/Drophunting_io" target="_blank">
             <div className="cursor-pointer">
               <PiXLogo size={20} />
             </div>

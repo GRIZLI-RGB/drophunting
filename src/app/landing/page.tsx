@@ -607,7 +607,7 @@ const Landing = () => {
                 /> */}
                 <RiTelegram2Fill
                   onClick={() =>
-                    window.open("t.me/drophunting_group", "_blank")
+                    window.open("https://t.me/drophunting_group", "_blank")
                   }
                   className="cursor-pointer hover:opacity-80 transition-opacity"
                   size={40}

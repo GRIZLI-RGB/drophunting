@@ -24,7 +24,10 @@ import { FaAngleDown, FaAngleUp, FaCheck } from "react-icons/fa6";
 import CalendarModal from "@/shared/components/CalendarModal";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
-import { formatInvestmentAmount } from "@/shared/utils/formatters";
+import {
+  formatInvestmentAmount,
+  parseInvestmentAmount,
+} from "@/shared/utils/formatters";
 
 const CustomSlider = styled(Slider)({
   height: 8,
@@ -126,7 +129,10 @@ const Favorites = () => {
       favorites: 1,
     };
 
-    if (actualSorting.key !== "default") {
+    // Only add sorting parameters if not handling investment sorting client-side
+    const isInvestmentSorting = actualSorting.key === "invest";
+
+    if (actualSorting.key !== "default" && !isInvestmentSorting) {
       params.sorting = actualSorting.orderBy === "asc" ? 1 : 2;
       params.type_sorting = actualSorting.key as GuidesParams["type_sorting"];
     }
@@ -145,6 +151,27 @@ const Favorites = () => {
     effectiveLanguage,
   ]);
 
+  // Apply client-side sorting for investments if needed
+  const favoriteGuides = useMemo(() => {
+    if (!guides?.data) return [];
+
+    const guidesData = [...guides.data].filter((guide) => guide.favorite > 0);
+
+    // Apply client-side sorting for investments
+    if (actualSorting.key === "invest") {
+      guidesData.sort((a, b) => {
+        const investmentA = parseInvestmentAmount(a.investments);
+        const investmentB = parseInvestmentAmount(b.investments);
+
+        return actualSorting.orderBy === "asc"
+          ? investmentA - investmentB
+          : investmentB - investmentA;
+      });
+    }
+
+    return guidesData;
+  }, [guides?.data, actualSorting]);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -156,9 +183,7 @@ const Favorites = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => {};
   }, []);
 
   const handleToggleFavorite = async (e: React.MouseEvent, guideId: number) => {
@@ -200,8 +225,6 @@ const Favorites = () => {
     const backendUrl = "https://app.drophunting.io";
     return path.startsWith("http") ? path : `${backendUrl}${path}`;
   };
-
-  const favoriteGuides = guides?.data.filter((guide) => guide.favorite > 0);
 
   const [isCalendarModalOpen, setIsCalendarModalOpen] = useState(false);
   const [guideCalendarId, setGuideCalendarId] = useState<number>(0);
