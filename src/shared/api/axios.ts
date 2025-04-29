@@ -70,12 +70,24 @@ const handleUnauthorized = () => {
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
+    // if (
+    //   error.response?.status === 401 &&
+    //   !error.config?.url.includes("/login") &&
+    //   !error.config?.url.includes("/google/callback")
+    // ) {
+    //   console.log({ error });
+    //   handleUnauthorized();
+    // }
+    // return Promise.reject(error);
+    const isAuthRelatedEndpoint =
+      error.config?.url.includes("/login") ||
+      error.config?.url.includes("/google/callback");
+
     if (
-      error.response?.status === 401 &&
-      !error.config?.url.includes("/login") &&
-      !error.config?.url.includes("/google/callback")
+      (error.response?.status === 401 || error.response?.status === 403) &&
+      !isAuthRelatedEndpoint
     ) {
-      console.log({ error });
+      console.log("Unauthorized/Forbidden error:", error);
       handleUnauthorized();
     }
     return Promise.reject(error);

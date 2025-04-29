@@ -38,7 +38,7 @@ const Login = () => {
   const [gRecaptchaResponse, setGRecaptchaResponse] = useState<string | null>(
     null,
   );
-  const [useCaptcha] = useState(true);
+  const [useCaptcha] = useState(!true);
 
   const { login, fetchRecaptchaToken } = useStore();
 
