@@ -20,6 +20,7 @@ const useAuth = () => {
     newPassword,
     sendEmailVerificationLink,
     setAuthStatus,
+    updateUser,
   } = useStore();
 
   useEffect(() => {
@@ -32,10 +33,21 @@ const useAuth = () => {
             updateAxiosToken(token);
             const { data } = await axiosInstance.get<User>("/api/user");
 
-            // Use user's language preference and remove cookie
-            if (data.lang) {
+            // Always check the cookie first and use it if available
+            const savedLanguage = Cookies.get("language");
+            if (savedLanguage) {
+              // Set the language in i18n
+              i18n.changeLanguage(savedLanguage);
+
+              // Only update the user profile if the language is different
+              if (data.lang !== savedLanguage) {
+                await updateUser({ lang: savedLanguage });
+              }
+            } else if (data.lang) {
+              // If no cookie exists but user has a language preference
               i18n.changeLanguage(data.lang);
-              Cookies.remove("language", { path: "/" });
+              // Set cookie to match user preference for future visits
+              Cookies.set("language", data.lang, { path: "/" });
             }
 
             useStore.setState({
@@ -85,7 +97,7 @@ const useAuth = () => {
         setInitializing(false);
       }
     }
-  }, [sessionVerified]);
+  }, [sessionVerified, updateUser]);
 
   const isAuthenticated = () => {
     return !!user;

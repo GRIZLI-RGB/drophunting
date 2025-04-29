@@ -1545,10 +1545,21 @@ const useStore = create<StoreState>()(
             const { data } = await axiosInstance.get<User>("/api/user");
             set({ user: data });
 
-            // Set language from user preferences and remove cookie
-            if (data.lang) {
+            // Check for language cookie first and prioritize it
+            const savedLanguage = Cookies.get("language");
+            if (savedLanguage) {
+              i18n.changeLanguage(savedLanguage);
+
+              // Only update the user profile if language differs
+              if (data.lang !== savedLanguage) {
+                await get().updateUser({ lang: savedLanguage });
+              }
+            }
+            // Only use user's language if no cookie exists
+            else if (data.lang) {
               i18n.changeLanguage(data.lang);
-              Cookies.remove("language", { path: "/" });
+              // Set the cookie for consistency
+              Cookies.set("language", data.lang, { path: "/" });
             }
 
             return data;
@@ -2195,10 +2206,21 @@ const useStore = create<StoreState>()(
               );
               set({ user: userData, sessionVerified: true });
 
-              // Set language from user preferences and remove cookie
-              if (userData.lang) {
+              // Check for language cookie first and prioritize it
+              const savedLanguage = Cookies.get("language");
+              if (savedLanguage) {
+                i18n.changeLanguage(savedLanguage);
+
+                // Only update the user profile if language differs
+                if (userData.lang !== savedLanguage) {
+                  await get().updateUser({ lang: savedLanguage });
+                }
+              }
+              // Only use user's language if no cookie exists
+              else if (userData.lang) {
                 i18n.changeLanguage(userData.lang);
-                Cookies.remove("language", { path: "/" });
+                // Set the cookie for consistency
+                Cookies.set("language", userData.lang, { path: "/" });
               }
             } catch (userError) {
               const err = userError as {
@@ -2280,6 +2302,23 @@ const useStore = create<StoreState>()(
               },
             );
             set({ user: userData, sessionVerified: true });
+
+            // Check for language cookie first and prioritize it
+            const savedLanguage = Cookies.get("language");
+            if (savedLanguage) {
+              i18n.changeLanguage(savedLanguage);
+
+              // Only update the user profile if language differs
+              if (userData.lang !== savedLanguage) {
+                await get().updateUser({ lang: savedLanguage });
+              }
+            }
+            // Only use user's language if no cookie exists
+            else if (userData.lang) {
+              i18n.changeLanguage(userData.lang);
+              // Set the cookie for consistency
+              Cookies.set("language", userData.lang, { path: "/" });
+            }
           } catch (userError) {
             console.warn("Error fetching user after registration:", userError);
             set({ sessionVerified: false, user: null });

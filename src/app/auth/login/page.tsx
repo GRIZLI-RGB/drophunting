@@ -248,7 +248,7 @@ const Login = () => {
                   {t("login.noAccount")}
                 </p>
                 <Link
-                  className="bg-[--dark-gray] font-sans rounded-xl hover:bg-[#2a2b30] transition-all duration-200 text-[14px] leading-[16px] font-medium w-[69px] h-[32px] flex items-center justify-center"
+                  className="bg-[--dark-gray] font-sans rounded-xl hover:bg-[#2a2b30] transition-all duration-200 text-[14px] leading-[16px] font-medium min-w-[69px] px-2 h-[32px] flex items-center justify-center"
                   href="/auth/sign-up">
                   {t("login.signUp")}
                 </Link>
