@@ -100,10 +100,11 @@ const Login = () => {
         updateAxiosToken(res.token || null);
         setShowAuthenticatorVerificationModal(true);
       } else {
+        console.log("metka 555");
         window.location.href = "/guides";
       }
     } catch (error) {
-      console.log({ error });
+      console.log("metka 123123123");
 
       setServerError(
         // @ts-expect-error: ""
