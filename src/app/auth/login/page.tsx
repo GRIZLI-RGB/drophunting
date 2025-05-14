@@ -101,7 +101,7 @@ const Login = () => {
         setShowAuthenticatorVerificationModal(true);
       } else {
         console.log("metka 555");
-        window.location.href = "/guides";
+        window.location.href = "drops";
       }
     } catch (error) {
       console.log("metka 123123123");

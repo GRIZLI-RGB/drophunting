@@ -64,8 +64,8 @@ const Header = () => {
   };
 
   const isActive = (href: string) => {
-    if (href === "/guides") {
-      return pathname.startsWith("/guides");
+    if (href === "/guides" || href === "/") {
+      return pathname.startsWith("/guides") || pathname === "/";
     }
     if (href === "/blog") {
       return pathname.startsWith("/blog");

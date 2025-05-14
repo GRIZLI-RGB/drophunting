@@ -307,15 +307,6 @@ export const PlansModal = ({ togglePlansModal }: PlansModalType) => {
                     {t("plansModal.benefit4")}
                   </p>
                 </div>
-                <div className="relative">
-                  <MdOutlineDone
-                    size={20}
-                    className="text-[#CBFF51] absolute top-0 left-0"
-                  />
-                  <p className="font-semibold leading-[20px] px-[25px]">
-                    {t("plansModal.benefit5")}
-                  </p>
-                </div>
               </div>
             </div>
             <div className="w-[100%] bg-transparent lg:w-[450px]">

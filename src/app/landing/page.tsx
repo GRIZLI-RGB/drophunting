@@ -19,7 +19,6 @@ import blocks from "../../../public/assets/blocks.png";
 import greenBlur from "../../../public/assets/green-blur.png";
 import arrow from "../../../public/assets/arrow.png";
 import telegram from "../../../public/assets/telegram.png";
-import prevDrop from "../../../public/assets/prev-drop.png";
 import paint from "../../../public/assets/paint.png";
 import bitcoin from "../../../public/assets/bitcoin.png";
 import ethereum from "../../../public/assets/ethereum.png";
@@ -35,15 +34,14 @@ import greenTether from "../../../public/assets/green-tether.png";
 import LandingModal from "../components/modals/LandingModal";
 import { MainLogo } from "@/shared/icons/MainLogo";
 import "../../../public/fonts/stylesheet.css";
-import clsx from "clsx";
+import Link from "next/link";
+import { landingBlocks } from "@/shared/utils/tabs";
 
 const Landing = () => {
   const [isLandingModalOpen, setIsLandingModalOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
-
-  const [numberRewards, setNumberRewards] = useState(9);
 
   const aboutSectionRef = useRef<HTMLDivElement>(null);
   const resultsSectionRef = useRef<HTMLDivElement>(null);
@@ -253,6 +251,14 @@ const Landing = () => {
                         {t("landing.discoverNewDrops")}
                       </p>
                     </li>
+                    <li className="relative flex items-center gap-[16px]">
+                      <div>
+                        <FaCheck size={18} className="text-[#ABE91A]" />
+                      </div>
+                      <p className="text-[14px] leading-[18px] md:text-[15px] lg:text-[18px] md:leading-[24px]">
+                        {t("landing.dontLoseNewDrops")}
+                      </p>
+                    </li>
                   </ul>
                   <a
                     href="https://app.drophunting.io/guides"
@@ -418,42 +424,38 @@ const Landing = () => {
           />
 
           <div className="flex flex-wrap items-center justify-center gap-[8px] md:gap-[12px] lg:gap-[25px]">
-            {[...new Array(numberRewards)].map((_, index) => (
+            {landingBlocks().map((item, index) => (
               <div
                 key={index}
-                className="w-[159px] h-[171px] md:w-[334px] md:h-[158px] lg:w-[356px] lg:h-[189px] bg-[#1F2027AB] rounded-[16px] px-[12px] py-[14px] md:p-[20px] lg:p-[25px] z-10 relative">
+                className="w-[159px] h-[260px] md:w-[334px] md:h-[158px] lg:w-[356px] lg:h-[189px] bg-[#1F2027AB] rounded-[16px] px-[12px] py-[14px] md:p-[20px] lg:p-[25px] z-10 relative">
                 <div className="flex flex-col md:flex-row md:items-center gap-[20px] md:gap-[24px] mb-[20px] lg:mb-[24px]">
                   <div>
                     <Image
-                      src={prevDrop}
-                      alt="Previous Drop Logo"
+                      src={item.image}
+                      alt={item.name}
                       className="w-[32px] h-[32px] md:w-[48px] md:h-[48px] rounded-[10px]"
+                      width={48}
+                      height={48}
                     />
                   </div>
                   <div className="flex flex-col gap-[8px]">
                     <p className="text-[14px] leading-[17px] md:text-[16px] md:leading-[20px] lg:text-[18px] lg:leading-[22px] font-bold">
-                      Hemi Network
+                      {item.name}
                     </p>
                     <p className="text-[12px] leading-[14px] md:text-[13px] md:leading-[16px] text-[#8E8E8E]">
-                      Ноябрь 2024
+                      {item.date}
                     </p>
                   </div>
                 </div>
-                <div className="flex md:flex-col gap-[12px] lg:gap-[20px]">
+                <div className="flex flex-col gap-[12px] lg:gap-[20px]">
                   <div className="flex flex-col md:flex-row md:items-center md:gap-[20px]">
-                    <p className="text-[11px] md:text-[14px] lg:text-[13px] leading-[16px] text-[#8E8E8E]">
-                      {t("landing.earned")}
-                    </p>
-                    <p className="text-[14px] md:text-[20px] lg:text-[28px] leading-[18px] font-semibold">
-                      $2500
+                    <p className="text-[16px] leading-[18px] font-semibold">
+                      {item.average}
                     </p>
                   </div>
                   <div className="flex flex-col md:flex-row smd:items-center md:gap-[35px]">
-                    <p className="text-[11px] md:text-[14px] lg:text-[13px] leading-[16px] text-[#8E8E8E]">
-                      {t("landing.investment")}
-                    </p>
-                    <p className="text-[14px] md:text-[20px] leading-[18px] text-[#ADADAD]">
-                      $0
+                    <p className="text-[14px] leading-[18px] text-[#ADADAD]">
+                      {item.result}
                     </p>
                   </div>
                 </div>
@@ -482,19 +484,6 @@ const Landing = () => {
             alt="Coin"
           />
         </div>
-        <div
-          className={clsx(
-            "flex items-center justify-center",
-            numberRewards === 14 && "opacity-0 pointer-events-none",
-          )}>
-          <button
-            onClick={() => setNumberRewards((prev) => prev + 5)}
-            className="z-[4] flex items-center justify-center bg-white rounded-[12px] px-[16px] py-[10px] h-[57px] min-w-[185px] cursor-pointer mt-[50px] hover:bg-opacity-90">
-            <p className="text-[14px] leading-[16px] text-black">
-              {t("landing.showMore")}
-            </p>
-          </button>
-        </div>
 
         <Image
           className="pointer-events-none absolute top-[10px] lg:top-[30px] right-[-10px] sm:right-[30px] md:right-[10px] lg:right-[70px] xl:right-[140px] w-[145px] md:w-[217px] lg:w-[297px] -rotate-12"
@@ -512,21 +501,26 @@ const Landing = () => {
           {[
             {
               number: "1",
-              title: t("landing.projectsPublishDrops"),
-              description: t("landing.projectsPublishDescription"),
+              title: t("landing.howItWorksTitle1"),
+              description: t("landing.howItWorksDescription1"),
               image: group,
             },
             {
               number: "2",
-              title: t("landing.projectsPublishDrops"),
-              description: t("landing.projectsPublishDescription"),
+              title: t("landing.howItWorksTitle2"),
+              description: t("landing.howItWorksDescription2"),
               image: landingZenchain,
             },
             {
               number: "3",
-              title: t("landing.earnMoney"),
-              description: t("landing.projectsPublishDescription"),
+              title: t("landing.howItWorksTitle3"),
+              description: t("landing.howItWorksDescription3"),
               image: dollarBag,
+            },
+            {
+              number: "4",
+              title: t("landing.howItWorksTitle4"),
+              description: t("landing.howItWorksDescription4"),
             },
           ].map((item) => (
             <div
@@ -543,6 +537,9 @@ const Landing = () => {
                       <span className="h-[550px] lg:h-[230px] mmmxl:h-[260px] mmxl:h-[280px] mxl:h-[335px] xl:h-[350px] lxl:h-[370px] w-[1px] bg-[#424242] absolute top-[65px] md:top-[80px] left-1/2 transform translate-x-1/2"></span>
                     )}
                     {Number(item.number) == 3 && (
+                      <span className="h-[550px] lg:h-[230px] mmmxl:h-[260px] mmxl:h-[280px] mxl:h-[335px] xl:h-[350px] lxl:h-[370px] w-[1px] bg-[#424242] absolute top-[65px] md:top-[80px] left-1/2 transform translate-x-1/2"></span>
+                    )}
+                    {Number(item.number) == 4 && (
                       <span className="hidden"></span>
                     )}
                   </p>
@@ -557,11 +554,13 @@ const Landing = () => {
                 </div>
               </div>
               <div>
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  className="pl-[60px] lg:p-0 w-[500px]"
-                />
+                {item.image && (
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    className="pl-[60px] lg:p-0 w-[500px]"
+                  />
+                )}
               </div>
             </div>
           ))}
@@ -760,15 +759,21 @@ const Landing = () => {
             Drop Hunting 2025
           </p>
           <ul className="flex flex-wrap items-center gap-[12px] md:gap-[24px]">
-            <li className="text-[12px] leading-[12px] text-[#535353]">
-              {t("landing.userAgreement")}
-            </li>
-            <li className="text-[12px] leading-[12px] text-[#535353]">
-              {t("landing.privacy")}
-            </li>
-            <li className="text-[12px] leading-[12px] text-[#535353]">
-              {t("landing.cookie")}
-            </li>
+            <Link
+              href="#"
+              className="hover:underline text-[12px] leading-[12px] text-[#535353]">
+              <li>{t("landing.userAgreement")}</li>
+            </Link>
+            <Link
+              href="#"
+              className="hover:underline text-[12px] leading-[12px] text-[#535353]">
+              <li>{t("landing.privacy")}</li>
+            </Link>
+            <Link
+              href="#"
+              className="hover:underline text-[12px] leading-[12px] text-[#535353]">
+              <li>{t("landing.cookie")}</li>
+            </Link>
           </ul>
         </div>
       </footer>

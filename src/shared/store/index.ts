@@ -531,6 +531,7 @@ type RecaptchaResponse = {
 
 type SuggestGuideParams = {
   name: string;
+  link?: string;
   description: string;
 };
 

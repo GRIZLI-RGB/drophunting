@@ -20,6 +20,7 @@ const SuggestGuide = () => {
   const isActive = (href: string) => pathname === href;
 
   const [name, setName] = useState("");
+  const [link, setLink] = useState("");
   const [description, setDescription] = useState("");
   const [formErrors, setFormErrors] = useState<{
     name?: string;
@@ -45,6 +46,7 @@ const SuggestGuide = () => {
   useEffect(() => {
     if (suggestGuideSuccess) {
       setName("");
+      setLink("");
       setDescription("");
       setFormErrors({});
       resetSuggestGuideState();
@@ -64,7 +66,7 @@ const SuggestGuide = () => {
       return;
     }
 
-    await suggestGuide({ name, description });
+    await suggestGuide({ name, link, description });
 
     setIsSend(true);
   };
@@ -143,16 +145,10 @@ const SuggestGuide = () => {
                 </div>
                 <div className="mt-4 mb-[32px]">
                   <p className="text-[24px] font-semibold leading-[32px] tracking-[-3%] mb-2">
-                    {t("guides.title")}
-                  </p>
-                  <p className="text-[#949392] text-[14px] leading-[20px] sm:w-[450px] lg:w-[650px]">
-                    {t("suggestGuide.description")}
+                    {t("suggestGuide.suggestTheGuide")}
                   </p>
                 </div>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                  <p className="text-[18px] leading-[32px] font-semibold">
-                    {t("suggestGuide.suggestTheGuide")}
-                  </p>
                   <div className="max-w-[635px] w-full flex flex-col gap-4">
                     <div className="flex flex-col gap-2">
                       <label
@@ -182,6 +178,35 @@ const SuggestGuide = () => {
                       <div className="text-right">
                         <span className="text-[12px] text-[#949392]">
                           {name.length}/255
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <label
+                        htmlFor="guide-link"
+                        className="text-[14px] leading-[16px]">
+                        {t("suggestGuide.linkOfGuide")}
+                      </label>
+                      <label
+                        htmlFor="guide-link"
+                        className="text-[12px] leading-[16px] text-[#949392]">
+                        {t("suggestGuide.linkOfGuideDescription")}
+                      </label>
+                      <input
+                        id="guide-link"
+                        type="text"
+                        value={link}
+                        onChange={(e) => {
+                          if (e.target.value.length <= 255) {
+                            setLink(e.target.value);
+                          }
+                        }}
+                        className="w-full h-[48px] bg-[#292B2F] rounded-[14px] py-[12px] px-[16px] text-[14px] leading-[20px] text-white"
+                      />
+                      <div className="text-right">
+                        <span className="text-[12px] text-[#949392]">
+                          {link.length}/255
                         </span>
                       </div>
                     </div>
