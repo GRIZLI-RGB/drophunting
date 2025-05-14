@@ -81,16 +81,11 @@ export const AuthenticatorVerificationModal = ({
             });
           })
           .catch((err) => {
-            console.log("тут ошибка");
             if (err.status === 403) {
-              console.log("123123123");
-
               if (document.activeElement instanceof HTMLElement) {
-                console.log("dfdfd");
                 document.activeElement.blur();
               }
 
-              console.log(err);
               setErrorMessage(
                 typeof err?.response?.data === "string"
                   ? err?.response?.data

@@ -36,12 +36,15 @@ import { MainLogo } from "@/shared/icons/MainLogo";
 import "../../../public/fonts/stylesheet.css";
 import Link from "next/link";
 import { landingBlocks } from "@/shared/utils/tabs";
+import clsx from "clsx";
 
 const Landing = () => {
   const [isLandingModalOpen, setIsLandingModalOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
+  const [showAllBlocks, setShowAllBlocks] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const aboutSectionRef = useRef<HTMLDivElement>(null);
   const resultsSectionRef = useRef<HTMLDivElement>(null);
@@ -92,6 +95,18 @@ const Landing = () => {
       document.body.classList.remove("no-scroll");
     }
   }, [isLandingModalOpen]);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 608);
+    };
+
+    checkScreenSize();
+
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   return (
     <div className="bg-black text-white">
@@ -424,43 +439,58 @@ const Landing = () => {
           />
 
           <div className="flex flex-wrap items-center justify-center gap-[8px] md:gap-[12px] lg:gap-[25px]">
-            {landingBlocks().map((item, index) => (
-              <div
-                key={index}
-                className="w-[159px] h-[260px] md:w-[334px] md:h-[158px] lg:w-[356px] lg:h-[189px] bg-[#1F2027AB] rounded-[16px] px-[12px] py-[14px] md:p-[20px] lg:p-[25px] z-10 relative">
-                <div className="flex flex-col md:flex-row md:items-center gap-[20px] md:gap-[24px] mb-[20px] lg:mb-[24px]">
-                  <div>
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      className="w-[32px] h-[32px] md:w-[48px] md:h-[48px] rounded-[10px]"
-                      width={48}
-                      height={48}
-                    />
+            {landingBlocks()
+              .slice(0, isSmallScreen && !showAllBlocks ? 5 : undefined)
+              .map((item, index) => (
+                <div
+                  key={index}
+                  className="h-[230px] sm:h-[210px] lg:h-[190px] w-[280px] sm:w-[calc(50%-8px)] md:w-[calc(50%-12px)] lg:w-[356px] bg-[#1F2027AB] rounded-[16px] px-[12px] py-[14px] md:p-[20px] lg:p-[25px] z-10 relative">
+                  <div className="flex flex-col md:flex-row md:items-center gap-[20px] md:gap-[24px] mb-[20px] lg:mb-[24px]">
+                    <div>
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        className="w-[32px] h-[32px] md:w-[48px] md:h-[48px] rounded-[10px]"
+                        width={48}
+                        height={48}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-[8px]">
+                      <p className="text-[14px] leading-[17px] md:text-[16px] md:leading-[20px] lg:text-[18px] lg:leading-[22px] font-bold">
+                        {item.name}
+                      </p>
+                      <p className="text-[12px] leading-[14px] md:text-[13px] md:leading-[16px] text-[#8E8E8E]">
+                        {item.date}
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-[8px]">
-                    <p className="text-[14px] leading-[17px] md:text-[16px] md:leading-[20px] lg:text-[18px] lg:leading-[22px] font-bold">
-                      {item.name}
-                    </p>
-                    <p className="text-[12px] leading-[14px] md:text-[13px] md:leading-[16px] text-[#8E8E8E]">
-                      {item.date}
-                    </p>
+                  <div className="flex flex-col gap-[12px] lg:gap-[20px]">
+                    <div className="flex flex-col md:flex-row md:items-center md:gap-[20px]">
+                      <p className="text-[16px] leading-[18px] font-semibold">
+                        {item.average}
+                      </p>
+                    </div>
+                    <div className="flex flex-col md:flex-row smd:items-center md:gap-[35px]">
+                      <p className="text-[14px] leading-[18px] text-[#ADADAD]">
+                        {item.result}
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div className="flex flex-col gap-[12px] lg:gap-[20px]">
-                  <div className="flex flex-col md:flex-row md:items-center md:gap-[20px]">
-                    <p className="text-[16px] leading-[18px] font-semibold">
-                      {item.average}
-                    </p>
-                  </div>
-                  <div className="flex flex-col md:flex-row smd:items-center md:gap-[35px]">
-                    <p className="text-[14px] leading-[18px] text-[#ADADAD]">
-                      {item.result}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
+              ))}
+            <div
+              className={clsx(
+                "flex items-center justify-center w-full",
+                (!isSmallScreen || showAllBlocks) && "hidden",
+              )}>
+              <button
+                onClick={() => setShowAllBlocks(true)}
+                className="z-[4] flex items-center justify-center bg-white rounded-[12px] px-[16px] py-[10px] h-[57px] min-w-[185px] cursor-pointer mt-[20px] hover:bg-opacity-90">
+                <p className="text-[14px] leading-[16px] text-black">
+                  {t("landing.showMore")}
+                </p>
+              </button>
+            </div>
           </div>
 
           <Image

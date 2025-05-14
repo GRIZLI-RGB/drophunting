@@ -2248,7 +2248,6 @@ const useStore = create<StoreState>()(
               } else {
                 set({ sessionVerified: false, user: null });
               }
-              console.log("Метка 7");
               updateAxiosToken(null);
               Cookies.remove("auth-token");
 
