@@ -139,8 +139,12 @@ const Guides = () => {
 
   // This is the single effect responsible for fetching data
   useEffect(() => {
-    // Reset page to 1 when anything but page number changes
-    if (languageToWatch !== undefined && currentPage !== 1) {
+    // Only reset page when language changes, not when page changes
+    if (
+      languageToWatch !== undefined &&
+      currentPage !== 1 &&
+      languageToWatch !== effectiveLanguage
+    ) {
       setCurrentPage(1);
       return; // Don't fetch here, let the effect run again with page=1
     }
