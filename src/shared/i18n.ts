@@ -287,7 +287,9 @@ i18n.use(initReactI18next).init({
           resultsTitle: "RESULTS",
           rewardsFromPastDrops: "REWARDS FROM INCOMING DROPS",
           usersParticipate:
-            "Our users participate in more than 500 drops and earn guaranteed rewards",
+            "Real examples of activities that have already brought results",
+          lookForUpdates:
+            "Keep an eye on updates and don't miss the next chance to earn",
           earned: "Earned",
           investment: "Investment",
           howItWorksTitle: "How it works",
@@ -971,7 +973,9 @@ i18n.use(initReactI18next).init({
           resultsTitle: "РЕЗУЛЬТАТЫ",
           rewardsFromPastDrops: "НАГРАДЫ С ПРИШЕДШИХ ДРОПОВ",
           usersParticipate:
-            "Наши пользователи участвуют в более чем 500 дропов и зарабатывают гарантированные вознаграждения",
+            "Реальные примеры активностей, которые уже принесли результат",
+          lookForUpdates:
+            "Следи за обновлениями и не пропусти следующий шанс заработать",
           earned: "Заработано",
           investment: "Вложения",
           howItWorksTitle: "Как это работает",

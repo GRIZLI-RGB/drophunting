@@ -427,8 +427,11 @@ const Landing = () => {
         <p className="font-bold font-druk text-[46px] leading-[46px] md:text-[68px] md:leading-[72px] lg:text-[80px] lg:leading-[80px] text-center mb-[20px]">
           {t("landing.rewardsFromPastDrops")}
         </p>
-        <p className="text-center text-[14px] leading-[21px] md:text-[17px] max-w-[539px] lg:w-full md:leading-[24px]">
+        <p className="text-center text-[14px] leading-[21px] md:text-[17px] lg:w-full md:leading-[24px]">
           {t("landing.usersParticipate")}
+        </p>
+        <p className="text-center text-[14px] leading-[21px] md:text-[17px] lg:w-full md:leading-[24px]">
+          {t("landing.lookForUpdates")}
         </p>
 
         <div className="relative z-0 mt-[50px] flex flex-wrap items-center gap-[8px] md:gap-[12px] lg:gap-[25px]">
@@ -790,17 +793,17 @@ const Landing = () => {
           </p>
           <ul className="flex flex-wrap items-center gap-[12px] md:gap-[24px]">
             <Link
-              href="#"
+              href="/terms-and-privacy"
               className="hover:underline text-[12px] leading-[12px] text-[#535353]">
               <li>{t("landing.userAgreement")}</li>
             </Link>
             <Link
-              href="#"
+              href="/terms-and-privacy"
               className="hover:underline text-[12px] leading-[12px] text-[#535353]">
               <li>{t("landing.privacy")}</li>
             </Link>
             <Link
-              href="#"
+              href="/terms-and-privacy"
               className="hover:underline text-[12px] leading-[12px] text-[#535353]">
               <li>{t("landing.cookie")}</li>
             </Link>
