@@ -22,17 +22,6 @@ export const metadata: Metadata = {
   description:
     "Track and discover profitable product drops, releases, and limited editions to maximize your e-commerce success.",
   keywords: "drop hunting, product drops, ecommerce, limited releases",
-  openGraph: {
-    title: "DropHunting - Find and Hunt Profitable Product Drops",
-    description:
-      "Track and discover profitable product drops, releases, and limited editions to maximize your e-commerce success.",
-    url: "https://drophunting.com",
-    siteName: "DropHunting",
-    type: "website",
-  },
-  robots: "index, follow",
-  themeColor: "#101114",
-  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({
