@@ -97,8 +97,6 @@ axiosInstance.interceptors.response.use(
     const isLoginPage = currentPageUrl.startsWith("/auth/login");
     const isGoogleCallbackPage = currentPageUrl.startsWith("/google/callback");
 
-    console.log(currentPageUrl);
-
     if (
       (error.response?.status === 401 || error.response?.status === 403) &&
       !isLoginPage &&

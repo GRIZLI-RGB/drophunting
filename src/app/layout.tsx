@@ -17,12 +17,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "DropHunting - Find and Hunt Profitable Product Drops",
-  description:
-    "Track and discover profitable product drops, releases, and limited editions to maximize your e-commerce success.",
-  keywords: "drop hunting, product drops, ecommerce, limited releases",
-};
+export function generateMetadata(): Metadata {
+  return {
+    title: "DropHunting - Find and Hunt Profitable Product Drops",
+    description:
+      "Track and discover profitable product drops, releases, and limited editions to maximize your e-commerce success.",
+    keywords: "drop hunting, product drops, ecommerce, limited releases",
+  };
+}
 
 export default function RootLayout({
   children,

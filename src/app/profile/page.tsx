@@ -289,9 +289,7 @@ const Profile = () => {
     });
 
     try {
-      console.log("Sending update data:", updateData);
       const success = await updateUser(updateData);
-      console.log("Update success:", success, "User after update:", user);
 
       if (success) {
         if (editedLanguage !== user.lang) {

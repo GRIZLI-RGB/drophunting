@@ -66,8 +66,14 @@ export function LandingClient() {
 
     setSelectedLanguage(code);
     i18n.changeLanguage(code);
+
     // Save language preference in cookies for non-logged in users
     Cookies.set("language", code, { expires: 365, path: "/" });
+
+    // Also update the URL parameter to ensure SSR gets the right language
+    const url = new URL(window.location.href);
+    url.searchParams.set("lang", code);
+    window.history.replaceState({}, "", url.toString());
 
     setIsLanguageDropdownOpen(false);
   };
@@ -794,17 +800,17 @@ export function LandingClient() {
           </p>
           <ul className="flex flex-wrap items-center gap-[12px] md:gap-[24px]">
             <Link
-              href="/terms-and-privacy"
+              href="https://app.drophunting.io/terms-and-privacy"
               className="hover:underline text-[12px] leading-[12px] text-[#535353]">
               <li>{t("landing.userAgreement")}</li>
             </Link>
             <Link
-              href="/terms-and-privacy"
+              href="https://app.drophunting.io/terms-and-privacy"
               className="hover:underline text-[12px] leading-[12px] text-[#535353]">
               <li>{t("landing.privacy")}</li>
             </Link>
             <Link
-              href="/terms-and-privacy"
+              href="https://app.drophunting.io/terms-and-privacy"
               className="hover:underline text-[12px] leading-[12px] text-[#535353]">
               <li>{t("landing.cookie")}</li>
             </Link>

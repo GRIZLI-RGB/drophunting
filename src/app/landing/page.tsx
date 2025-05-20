@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { LandingClient } from "./components/LandingClient";
 import axiosInstance from "@/shared/api/axios";
-import { cookies } from "next/headers";
 
 type SeoMetadata = {
   title: {
@@ -18,36 +17,56 @@ type SeoMetadata = {
   };
 };
 
-async function getLanguage(): Promise<"en" | "ru"> {
-  const cookieStore = await cookies();
-  const language = cookieStore.get("language")?.value;
-  return (language === "ru" ? "ru" : "en") as "en" | "ru";
-}
+const fallbackSeoData: SeoMetadata = {
+  title: {
+    en: "DropHunting - Find Profitable Product Drops",
+    ru: "DropHunting - Найдите выгодные выпуски продуктов",
+  },
+  description: {
+    en: "Discover the best product drops and limited editions for e-commerce success.",
+    ru: "Откройте для себя лучшие выпуски продуктов и ограниченные издания для успеха в электронной коммерции.",
+  },
+  keywords: {
+    en: "drop hunting, product drops, ecommerce, landing page",
+    ru: "охота за дропами, выпуск продуктов, электронная коммерция, целевая страница",
+  },
+};
 
-async function getSeoMetadata(): Promise<SeoMetadata> {
-  const response = await axiosInstance.get("/api/seo");
-  return response.data as SeoMetadata;
-}
+export async function generateMetadata({
+  searchParams,
+}: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  searchParams: any;
+}): Promise<Metadata> {
+  let lang: "en" | "ru" = "ru";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const [seoData, language] = await Promise.all([
-    getSeoMetadata(),
-    getLanguage(),
-  ]);
+  if (typeof searchParams.lang === "string") {
+    lang = (searchParams.lang === "en" ? "en" : "ru") as "en" | "ru";
+  }
+
+  let seoData: SeoMetadata;
+
+  try {
+    const response = await axiosInstance.get("/api/seo");
+    seoData = response.data as SeoMetadata;
+  } catch (error) {
+    console.error("Failed to fetch SEO metadata:", error);
+    seoData = fallbackSeoData;
+  }
 
   return {
-    title: seoData.title[language],
-    description: seoData.description[language],
-    keywords: seoData.keywords[language],
+    title: seoData.title[lang],
+    description: seoData.description[lang],
+    keywords: seoData.keywords[lang],
     alternates: {
       languages: {
-        en: "/en",
-        ru: "/ru",
+        en: "/landing?lang=en",
+        ru: "/landing?lang=ru",
       },
     },
   };
 }
 
-export default async function LandingPage() {
+export default function LandingPage() {
   return <LandingClient />;
 }
