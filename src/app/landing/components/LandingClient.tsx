@@ -70,12 +70,13 @@ export function LandingClient() {
     // Save language preference in cookies for non-logged in users
     Cookies.set("language", code, { expires: 365, path: "/" });
 
-    // Also update the URL parameter to ensure SSR gets the right language
+    // Close the dropdown before navigation
+    setIsLanguageDropdownOpen(false);
+
+    // Update the URL and reload the page to update SEO metadata
     const url = new URL(window.location.href);
     url.searchParams.set("lang", code);
-    window.history.replaceState({}, "", url.toString());
-
-    setIsLanguageDropdownOpen(false);
+    window.location.href = url.toString();
   };
 
   const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
@@ -90,8 +91,20 @@ export function LandingClient() {
   useEffect(() => {
     // Initialize language from cookies for non-logged in users
     const savedLanguage = Cookies.get("language");
-    if (savedLanguage && i18n.language !== savedLanguage) {
-      i18n.changeLanguage(savedLanguage);
+    const defaultLanguage = savedLanguage || "ru";
+
+    if (i18n.language !== defaultLanguage) {
+      i18n.changeLanguage(defaultLanguage);
+      setSelectedLanguage(defaultLanguage);
+    }
+
+    // Ensure the URL always includes the lang parameter
+    const url = new URL(window.location.href);
+    const urlLang = url.searchParams.get("lang");
+
+    if (!urlLang) {
+      url.searchParams.set("lang", defaultLanguage);
+      window.history.replaceState({}, "", url.toString());
     }
   }, [i18n]);
 
