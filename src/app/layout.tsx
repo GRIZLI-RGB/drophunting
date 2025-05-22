@@ -6,6 +6,7 @@ import "./globals.css";
 import "overlayscrollbars/overlayscrollbars.css";
 import "../shared/styles/scrollbar.css";
 import "../shared/styles/server-content.scss";
+import { cookies } from "next/headers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,8 +32,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = cookies();
+  // @ts-expect-error: "Bad package for i18n"
+  const i18nCookie = cookieStore.get("language");
+  const lang = i18nCookie?.value || "en";
+
   return (
-    <html lang="en" style={{ overflow: "auto" }}>
+    <html lang={lang} style={{ overflow: "auto" }}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#101114]`}>
         <ClientLayout>{children}</ClientLayout>
